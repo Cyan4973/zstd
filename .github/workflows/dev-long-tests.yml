@@ -136,6 +136,15 @@ jobs:
         make clean
         make -C tests test-fuzzer-stackmode
 
+  static-analyzer-scanbuild:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: install scan-build
+      run: sudo apt-get install clang-tools
+    - name: static analyzer    # ~26mn
+      run: ZSTD_LEGACY_SUPPORT=0 make staticAnalyze
+
   oss-fuzz:
     runs-on: ubuntu-latest
     strategy:
