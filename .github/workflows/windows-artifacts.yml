@@ -42,7 +42,7 @@ jobs:
 
     - name: Building zstd programs
       run: |
-        CPPFLAGS=-I../zlib LDFLAGS=../zlib/libz.a make -j allzstd MOREFLAGS=-static V=1
+        CPPFLAGS=-I../zlib LDLIBS=../zlib/libz.a LDFLAGS=-static make -j allzstd V=1
 
     - name: Create artifacts
       run: |
