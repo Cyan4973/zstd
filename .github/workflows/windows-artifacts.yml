@@ -56,3 +56,10 @@ jobs:
         if-no-files-found: error # defaults to `warn`
         path: ${{ github.workspace }}/zstd-${{ github.ref_name }}-${{matrix.ziparch}}/
         name: zstd-${{ github.ref_name }}-${{matrix.ziparch}}
+
+    - name: Upload release asset
+      if: github.event_name == 'release'
+      shell: pwsh
+      run: |
+        gh release upload "${{ github.ref_name }}" "$env:GITHUB_WORKSPACE/zstd-${{ github.ref_name }}-${{ matrix.ziparch }}.zip" --clobber
+
